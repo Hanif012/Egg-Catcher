@@ -996,13 +996,22 @@
             "id": "e4fa02c5-e58a-4209-8422-af62d682a7f2",
             "actions": [
                 {
-                    "name": "Mouth",
+                    "name": "Fire",
                     "type": "Button",
                     "id": "7ac12f0c-403d-4639-b5e5-986fa82dc145",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Hit",
+                    "type": "PassThrough",
+                    "id": "dd309b39-d902-466f-b9ff-2d2fe1f78709",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -1013,18 +1022,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Mouth",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "1624131b-4dc3-4ce2-8cc9-4d8643e1d079",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Mouth",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "059cacbb-4630-4250-8c9b-6f5f1a4edca5",
+                    "path": "<Touchscreen>/primaryTouch",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "Hit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

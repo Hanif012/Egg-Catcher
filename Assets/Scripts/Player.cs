@@ -1,10 +1,20 @@
+using InputSamples.Gestures;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Animator))]
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
+    private Animator animator;
+    InputAction Swipe;
+    
+    [SerializeField]
+    private GestureController gestureController;
+
+
     void Start()
     {
+        // Swipe = InputSystem.actions.FindAction("Swipe");
         if(animator == null)
         {
             animator = GetComponent<Animator>();
@@ -14,10 +24,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Hit();
-        }
+    //    if(currentSwipeInput.TravelDistance > 100)
+    //    {
+    //        animator.SetTrigger("Attack");
+    //        Debug.Log("Attack");
+    //    }
     }
 
     public void Hit()

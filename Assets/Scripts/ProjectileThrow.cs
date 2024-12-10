@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,33 +19,33 @@ public class ProjectileThrow : MonoBehaviour
     [SerializeField]
     Transform EndPosition;
 
-    public InputAction fire;
+    InputAction fireInput;
 
+    void Awake()
+    {
+        fireInput = InputSystem.actions.FindAction("Fire"); 
+    }
     void OnEnable()
     {
         trajectoryPredictor = GetComponent<TrajectoryPredictor>();
 
         if (StartPosition == null)
             StartPosition = transform;
-
         if (EndPosition == null)
         {
             EndPosition = transform;
             Debug.LogWarning("EndPosition not set. Defaulting to StartPosition");
         }
 
-        fire.Enable();
-        fire.performed += ThrowObject;
-    }
-
-    void OnDisable()
-    {
-        fire.Disable();
-        fire.performed -= ThrowObject;
+        fireInput.Enable();
     }
 
     void Update()
     {
+        if(fireInput.triggered)
+        {
+            ThrowObject();
+        }
         Predict();
     }
 
@@ -52,7 +53,7 @@ public class ProjectileThrow : MonoBehaviour
     {
         trajectoryPredictor.PredictTrajectory(ProjectileData());
     }
-
+//TODO: Fix projection
     ProjectileProperties ProjectileData()
     {
         ProjectileProperties properties = new ProjectileProperties();
@@ -68,7 +69,7 @@ public class ProjectileThrow : MonoBehaviour
         return properties;
     }
 
-    void ThrowObject(InputAction.CallbackContext ctx)
+    void ThrowObject()
     {
         Rigidbody thrownObject = Instantiate(objectToThrow, StartPosition.position, Quaternion.identity);
         Vector3 direction = EndPosition.position - StartPosition.position;
